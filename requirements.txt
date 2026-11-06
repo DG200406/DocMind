@@ -18,6 +18,8 @@ torch==2.5.1
 pypdf==5.1.0
 python-docx==1.1.2
 
+pytest==8.3.4
+
 # Optional: install if you want OpenAI or Anthropic as the answer-generation LLM
 # langchain-openai==0.3.0
 # langchain-anthropic==0.3.3

@@ -28,7 +28,11 @@ def get_llm() -> BaseLanguageModel:
             "text2text-generation",
             model=settings.hf_llm_model,
             max_new_tokens=256,
+            truncation=True,
         )
+        # The question sits at the end of our prompt template, so truncate from
+        # the left (dropping the oldest history/context) to keep it intact.
+        pipe.tokenizer.truncation_side = "left"
         return HuggingFacePipeline(pipeline=pipe)
 
     raise ValueError(f"Unknown LLM_PROVIDER '{settings.llm_provider}'")
