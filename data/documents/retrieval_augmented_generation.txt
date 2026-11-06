@@ -1,0 +1,34 @@
+Retrieval-Augmented Generation (RAG)
+
+Retrieval-augmented generation is a technique for answering questions using a
+large language model while grounding its answers in an external collection of
+documents, rather than relying solely on what the model memorized during
+training. A RAG system has two main stages: retrieval, which finds the pieces
+of text most relevant to a question, and generation, which asks a language
+model to produce an answer using those retrieved pieces as context.
+
+The retrieval stage usually works by splitting documents into smaller chunks,
+embedding each chunk into a vector with a model such as a sentence-transformer,
+and storing those vectors in a vector index such as FAISS. When a question
+arrives, it is embedded with the same model, and the vector index returns the
+chunks whose embeddings are closest to the question's embedding.
+
+A common refinement is to retrieve more candidates than are actually needed
+(for example the top 20) and then re-rank them with a more accurate but
+slower model, such as a cross-encoder, keeping only the top few (for example
+the top 4) to pass to the language model. This two-stage retrieve-then-rerank
+approach is more accurate than using the vector index's ranking alone, because
+cross-encoders can directly compare the full text of the question against the
+full text of each candidate, rather than relying on compressed embeddings.
+
+The generation stage builds a prompt containing the retrieved chunks and the
+user's question, then asks a language model to answer using only that
+context. This reduces hallucination compared to asking the model with no
+context, and it lets the system cite which source document an answer came
+from. For multi-turn conversations, the system also needs to remember earlier
+questions and answers so that follow-up questions like "what about the second
+one?" can be understood and used to retrieve the right context.
+
+RAG systems are commonly served through a web API, for example using FastAPI
+in Python, so that a chat interface or another application can send a
+question and receive an answer along with its supporting sources.

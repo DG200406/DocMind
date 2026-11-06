@@ -1,0 +1,27 @@
+FastAPI for Serving Machine Learning Applications
+
+FastAPI is a Python web framework for building APIs. It is built on top of
+Starlette for the web layer and Pydantic for data validation, and it uses
+standard Python type hints to automatically validate request and response
+data, generate interactive API documentation, and provide editor autocomplete.
+
+A typical FastAPI application defines endpoints as regular Python functions
+decorated with the HTTP method and path they handle, such as @app.post("/chat").
+The function's parameters can be typed as Pydantic models, and FastAPI will
+parse and validate incoming JSON against that model automatically, returning a
+clear error response if validation fails.
+
+FastAPI supports both synchronous and asynchronous endpoint functions, and it
+runs on an ASGI server such as uvicorn. For applications that load a large
+model or build an index at startup, FastAPI's lifespan context manager lets
+you run setup code once when the server starts and cleanup code once when it
+shuts down, so expensive resources like embedding models or a vector index are
+loaded a single time rather than on every request.
+
+Because FastAPI automatically produces an OpenAPI schema, it also generates a
+browsable documentation page (by default at /docs) where every endpoint, its
+expected input, and its response shape can be inspected and tried directly in
+the browser. This makes FastAPI a common choice for serving machine learning
+and retrieval-augmented generation systems, since a data science team can
+expose a model or a RAG pipeline as a small set of well-documented HTTP
+endpoints that other applications, such as a chat frontend, can call.

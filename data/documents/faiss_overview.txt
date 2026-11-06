@@ -1,0 +1,31 @@
+FAISS: Facebook AI Similarity Search
+
+FAISS is a library developed by Meta AI for efficient similarity search and
+clustering of dense vectors. It is designed to handle collections ranging from
+a few thousand to several billion vectors, and it provides both exact and
+approximate nearest-neighbor search algorithms.
+
+At its core, FAISS organizes vectors into an index structure. The simplest
+index, IndexFlatL2, stores every vector and computes exact L2 distance against
+the query at search time. This is accurate but scales linearly with the number
+of vectors, so it becomes slow for very large collections.
+
+For larger datasets, FAISS offers approximate indexes such as IVF (inverted
+file) indexes, which cluster vectors into cells using k-means and only search
+the most relevant cells for a given query, and HNSW (hierarchical navigable
+small world) graphs, which build a multi-layer graph for fast approximate
+traversal. These approximate methods trade a small amount of recall for large
+gains in query speed.
+
+FAISS indexes can be combined with product quantization to compress vectors
+and reduce memory usage, which matters when storing hundreds of millions of
+embeddings. The library supports both CPU and GPU execution, and most indexes
+can be saved to disk and reloaded, which makes it practical to build an index
+once during ingestion and reuse it across many queries without rebuilding.
+
+In a typical retrieval-augmented generation (RAG) pipeline, FAISS stores the
+embedding vectors for document chunks. When a user asks a question, the
+question is embedded with the same model used for the documents, and FAISS
+returns the nearest chunks by vector distance. A well-tuned FAISS index can
+return the top candidates for a query in well under a second, even across a
+corpus of tens of thousands of chunks.

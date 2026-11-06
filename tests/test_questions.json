@@ -1,0 +1,25 @@
+[
+  {"question": "What does FAISS stand for and who developed it?", "expected_source": "faiss_overview.txt"},
+  {"question": "What is the difference between IndexFlatL2 and an IVF index in FAISS?", "expected_source": "faiss_overview.txt"},
+  {"question": "What is HNSW used for in FAISS?", "expected_source": "faiss_overview.txt"},
+  {"question": "How does product quantization help FAISS indexes?", "expected_source": "faiss_overview.txt"},
+  {"question": "Can a FAISS index be saved to disk and reloaded later?", "expected_source": "faiss_overview.txt"},
+
+  {"question": "What is a sentence embedding?", "expected_source": "sentence_embeddings.txt"},
+  {"question": "How many dimensions does all-MiniLM-L6-v2 produce?", "expected_source": "sentence_embeddings.txt"},
+  {"question": "Why are cross-encoders more accurate than comparing two embeddings?", "expected_source": "sentence_embeddings.txt"},
+  {"question": "Why are cross-encoders usually used only to re-rank a shortlist instead of searching the whole corpus?", "expected_source": "sentence_embeddings.txt"},
+  {"question": "What similarity metrics are commonly used to compare sentence embeddings?", "expected_source": "sentence_embeddings.txt"},
+
+  {"question": "What are the two main stages of a RAG system?", "expected_source": "retrieval_augmented_generation.txt"},
+  {"question": "Why does a RAG pipeline retrieve more candidates than it actually needs before re-ranking?", "expected_source": "retrieval_augmented_generation.txt"},
+  {"question": "How does RAG reduce hallucination compared to asking a language model with no context?", "expected_source": "retrieval_augmented_generation.txt"},
+  {"question": "What does a RAG system need to remember to handle multi-turn conversations?", "expected_source": "retrieval_augmented_generation.txt"},
+  {"question": "How is a RAG system commonly exposed to other applications?", "expected_source": "retrieval_augmented_generation.txt"},
+
+  {"question": "What two libraries is FastAPI built on top of?", "expected_source": "fastapi_overview.txt"},
+  {"question": "How does FastAPI validate incoming request data?", "expected_source": "fastapi_overview.txt"},
+  {"question": "What is the purpose of FastAPI's lifespan context manager?", "expected_source": "fastapi_overview.txt"},
+  {"question": "Where can you browse the automatically generated API documentation in FastAPI?", "expected_source": "fastapi_overview.txt"},
+  {"question": "What ASGI server is commonly used to run a FastAPI application?", "expected_source": "fastapi_overview.txt"}
+]

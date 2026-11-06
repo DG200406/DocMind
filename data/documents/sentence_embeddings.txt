@@ -1,0 +1,31 @@
+Sentence Embeddings and the Sentence-Transformers Library
+
+A sentence embedding is a fixed-length vector that represents the meaning of a
+piece of text, such that texts with similar meaning are mapped to nearby
+points in vector space. Unlike word embeddings, which assign one vector per
+word regardless of context, sentence embeddings are produced by running an
+entire sentence or passage through a transformer model and pooling the output
+into a single vector.
+
+The sentence-transformers library, built on top of HuggingFace's transformers
+library, provides pretrained models specifically fine-tuned to produce useful
+sentence embeddings. Models such as all-MiniLM-L6-v2 are popular because they
+are small and fast while still producing embeddings good enough for semantic
+search, clustering, and retrieval tasks. all-MiniLM-L6-v2 maps text to a
+384-dimensional vector and can embed thousands of sentences per second on a
+CPU.
+
+These embeddings are typically compared using cosine similarity or Euclidean
+distance. In retrieval-augmented generation, embeddings let a system find
+document chunks that are semantically related to a question even when the
+chunk does not share exact keywords with the question, which is the main
+limitation of older keyword-based search methods like TF-IDF or BM25.
+
+Sentence-transformers also provides cross-encoder models, which take a pair of
+texts (for example a query and a candidate passage) and output a single
+relevance score rather than independent embeddings. Cross-encoders are more
+accurate than comparing two separately computed embeddings because they let
+the model attend across both texts at once, but they are slower, since every
+pair must be scored individually. This is why cross-encoders are usually used
+to re-rank a small shortlist of candidates rather than to search an entire
+corpus directly.
