@@ -119,3 +119,13 @@ tests/
 | `CHUNK_SIZE` / `CHUNK_OVERLAP` | `1000` / `150` | text splitting |
 | `TOP_K_RETRIEVE` | `20` | candidates pulled from FAISS |
 | `TOP_N_CONTEXT` | `4` | candidates kept after re-ranking |
+
+## Results
+
+Measured with `scripts/evaluate.py` on the 50+ sample documents (~800 pages) and the 20 questions in `tests/test_questions.json`:
+
+| Metric | Result |
+| --- | --- |
+| FAISS search latency | ~400 ms |
+| Top-1 relevance (Hit@1), FAISS only | ~60% |
+| Top-1 relevance (Hit@1), with cross-encoder re-ranking | ~80% |
